@@ -114,3 +114,45 @@ function add(text, who) {
 
     chat.scrollTop = chat.scrollHeight;
 }
+// ===== VOICE INPUT =====
+const mic = document.getElementById("mic");
+
+const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    mic.onclick = () => {
+        recognition.start();
+        mic.innerText = "🔴";
+    };
+
+    recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+
+        input.value = text;
+
+        mic.innerText = "🎙️";
+
+        // Automatically send the spoken question
+        send.click();
+    };
+
+    recognition.onerror = () => {
+        mic.innerText = "🎙️";
+    };
+
+    recognition.onend = () => {
+        mic.innerText = "🎙️";
+    };
+
+} else {
+    mic.onclick = () => {
+        alert("Voice input is not supported in this browser.");
+    };
+}
