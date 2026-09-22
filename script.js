@@ -70,6 +70,7 @@ async function askGemini(question) {
 
         chat.lastChild.innerText =
             "D.I.S.C.O: " + reply;
+        speak(reply);
 
     } catch (error) {
 
@@ -155,4 +156,15 @@ if (SpeechRecognition) {
     mic.onclick = () => {
         alert("Voice input is not supported in this browser.");
     };
+}
+function speak(text) {
+    speechSynthesis.cancel();
+
+    const voice = new SpeechSynthesisUtterance(text);
+    voice.lang = "en-IN";
+    voice.rate = 1.0;
+    voice.pitch = 0.85;
+    voice.volume = 1.0;
+
+    speechSynthesis.speak(voice);
 }
