@@ -13,8 +13,8 @@ if (!API_KEY) {
     }
 }
 
-// Gemini model
-const MODEL = "gemini-2.5-flash";
+// Gemini mode
+const MODEL = "gemini-3.6-flash";
 
 // Ask Gemini
 async function askGemini(question) {
